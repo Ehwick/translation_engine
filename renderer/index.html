@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Book PDF Translator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Book PDF Translator</h1>
+
+      <div class="row">
+        <label for="apiKey">DeepSeek API key</label>
+        <input type="password" id="apiKey" placeholder="sk-..." />
+        <button id="saveKeyBtn">Save key</button>
+      </div>
+
+      <div class="row">
+        <button id="selectPdfBtn">Select PDF...</button>
+        <span id="fileLabel" class="file-label">No PDF selected</span>
+      </div>
+
+      <div class="row">
+        <label for="startPage">Start page</label>
+        <input type="number" id="startPage" min="1" value="1" />
+        <label for="endPage">End page (inclusive)</label>
+        <input type="number" id="endPage" min="1" value="1" />
+      </div>
+
+      <div class="row">
+        <label for="sourceLang">From</label>
+        <select id="sourceLang"></select>
+        <label for="targetLang">To</label>
+        <select id="targetLang"></select>
+      </div>
+
+      <div class="row">
+        <button id="translateBtn" disabled>Translate</button>
+      </div>
+
+      <div class="row">
+        <progress id="progressBar" value="0" max="1" hidden></progress>
+        <span id="progressLabel"></span>
+      </div>
+
+      <h2>Translated output</h2>
+      <div id="output" class="output"></div>
+
+      <div class="row">
+        <button id="saveOutputBtn">Save output...</button>
+      </div>
+
+      <h2>Build book</h2>
+      <div class="row">
+        <label for="bookTitle">Title</label>
+        <input type="text" id="bookTitle" placeholder="Book title" />
+      </div>
+      <div class="row">
+        <label for="bookSubtitle">Subtitle</label>
+        <input type="text" id="bookSubtitle" placeholder="Optional subtitle" />
+      </div>
+      <div class="row">
+        <label for="bookAuthor">Author</label>
+        <input type="text" id="bookAuthor" placeholder="Author name" />
+      </div>
+      <div class="row">
+        <label for="coverFont">Cover font</label>
+        <select id="coverFont"></select>
+      </div>
+      <div class="row">
+        <button id="buildBookBtn" disabled>Build book PDF...</button>
+        <span id="buildBookStatus" class="file-label"></span>
+      </div>
+    </div>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>

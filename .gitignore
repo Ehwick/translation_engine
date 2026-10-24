@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Node / Electron
+node_modules/
+
+# Book/PDF content - source material and translation output, not for public repo
+og_pdfs/
+new_pdfs/

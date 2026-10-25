@@ -90,24 +90,22 @@ progress {
 }
 
 .output {
+  box-sizing: border-box;
+  width: 100%;
   background: #141414;
   border: 1px solid #333;
   border-radius: 6px;
   padding: 14px;
   min-height: 300px;
   max-height: 480px;
-  overflow-y: auto;
-  white-space: pre-wrap;
+  resize: vertical;
+  font-family: inherit;
   font-size: 13px;
   line-height: 1.5;
+  color: #e6e6e6;
 }
 
-.output h3 {
-  color: #7aa2ff;
-  font-size: 13px;
-  margin: 14px 0 4px;
-}
-
-.output h3:first-child {
-  margin-top: 0;
+.output:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px #3a7afe;
 }

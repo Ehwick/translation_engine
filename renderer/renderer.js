@@ -20,7 +20,6 @@ const buildBookStatus = document.getElementById('buildBookStatus');
 
 let currentPdfPath = null;
 let currentPageCount = 0;
-let outputSegments = [];
 
 async function init() {
   const savedKey = await window.api.getApiKey();
@@ -65,15 +64,9 @@ window.api.onTranslateProgress(({ current, total, pageNum, translated }) => {
 });
 
 function appendPage(pageNum, translated) {
-  outputSegments.push({ pageNum, translated });
-  const heading = document.createElement('h3');
-  heading.textContent = `Page ${pageNum}`;
-  const body = document.createElement('div');
-  body.textContent = translated;
-  outputDiv.appendChild(heading);
-  outputDiv.appendChild(body);
+  const block = `Page ${pageNum}\n\n${translated}`;
+  outputDiv.value = outputDiv.value.trim() ? `${outputDiv.value.trim()}\n\n${block}` : block;
   outputDiv.scrollTop = outputDiv.scrollHeight;
-  buildBookBtn.disabled = false;
 }
 
 translateBtn.addEventListener('click', async () => {
@@ -94,9 +87,6 @@ translateBtn.addEventListener('click', async () => {
     return;
   }
 
-  outputSegments = [];
-  outputDiv.innerHTML = '';
-  buildBookBtn.disabled = true;
   progressBar.hidden = false;
   progressBar.value = 0;
   progressLabel.textContent = '';
@@ -120,21 +110,22 @@ translateBtn.addEventListener('click', async () => {
 });
 
 saveOutputBtn.addEventListener('click', async () => {
-  if (outputSegments.length === 0) {
-    alert('No translated output yet.');
+  const content = outputDiv.value.trim();
+  if (!content) {
+    alert('Nothing to save yet — type, paste, or translate some text first.');
     return;
   }
-  const savedPath = await window.api.saveOutput(outputSegments);
+  const savedPath = await window.api.saveOutput(content);
   if (savedPath) alert(`Saved to ${savedPath}`);
 });
 
 buildBookBtn.addEventListener('click', async () => {
-  if (outputSegments.length === 0) {
-    alert('No translated text yet.');
+  const manuscript = outputDiv.value.trim();
+  if (!manuscript) {
+    alert('Nothing to build yet — type, paste, or translate some text first.');
     return;
   }
 
-  const manuscript = outputSegments.map((s) => s.translated).join('\n\n');
   buildBookBtn.disabled = true;
   buildBookStatus.textContent = 'Building book...';
 

@@ -75,7 +75,7 @@ ipcMain.handle('book:build', async (_event, { title, subtitle, author, coverFont
   return result.filePath;
 });
 
-ipcMain.handle('output:save', async (_event, segments) => {
+ipcMain.handle('output:save', async (_event, content) => {
   const result = await dialog.showSaveDialog(mainWindow, {
     filters: [
       { name: 'Markdown', extensions: ['md'] },
@@ -83,9 +83,6 @@ ipcMain.handle('output:save', async (_event, segments) => {
     ],
   });
   if (result.canceled || !result.filePath) return null;
-  const content = segments
-    .map((s) => `## Page ${s.pageNum}\n\n${s.translated}\n`)
-    .join('\n');
   fs.writeFileSync(result.filePath, content, 'utf-8');
   return result.filePath;
 });

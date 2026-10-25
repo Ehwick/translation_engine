@@ -43,8 +43,12 @@
         <span id="progressLabel"></span>
       </div>
 
-      <h2>Translated output</h2>
-      <div id="output" class="output"></div>
+      <h2>Output</h2>
+      <textarea
+        id="output"
+        class="output"
+        placeholder="Translated pages will appear here, or just type/paste your own text — Build book works on whatever is in this box."
+      ></textarea>
 
       <div class="row">
         <button id="saveOutputBtn">Save output...</button>
@@ -68,7 +72,7 @@
         <select id="coverFont"></select>
       </div>
       <div class="row">
-        <button id="buildBookBtn" disabled>Build book PDF...</button>
+        <button id="buildBookBtn">Build book PDF...</button>
         <span id="buildBookStatus" class="file-label"></span>
       </div>
     </div>
